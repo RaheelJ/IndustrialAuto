@@ -1,0 +1,93 @@
+FUNCTION_BLOCK FB2
+//RUNAVG
+
+Author:'RJ'
+    
+    VAR
+        // Static Variables
+        S_Time:DINT;                                                //Time after which a sample of input is taken (Parameter)
+        Time_Unit:INT;                                              //Unit of time (Parameter)
+        Number_Samples:INT;                                         //Number of samples taken for average (Parameter)
+    
+        Sample_Time:DINT;                                                           //S_Time in ms
+        Vector_Samples:ARRAY[0..7] OF REAL:=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];      //Vector containing input samples
+        Cycle_Number:INT:=1;                                                        //Current execution cycle of the function
+        i:INT;                                                                      //Loop variable  
+        OLDT:TIME;                                                          //Record of time                                                 
+        
+    END_VAR
+    
+    VAR_TEMP
+        Temp_AVG:REAL;
+        NEWT:TIME;
+        TIME_ELAPSED:DINT;
+    END_VAR
+    
+    VAR_INPUT
+        IN:REAL;
+    END_VAR
+    
+    VAR_OUTPUT
+        OUT:REAL;
+    END_VAR
+    
+    CASE Time_Unit OF
+        0 :
+            Sample_Time:=S_Time*100;
+        1 :
+            Sample_Time:=S_Time*1000;
+        2 :
+            Sample_Time:=S_Time*60*1000;
+        3 :
+            Sample_Time:=S_Time*60*60*1000; 
+        4 :
+            Sample_Time:=S_Time*24*60*60*1000;
+    ELSE:
+        Sample_Time:=S_Time;
+    END_CASE;
+     
+    //Measuring and storing sample
+    IF Cycle_Number = 1 THEN
+        FOR i:= Number_Samples-1 TO 1 BY -1 DO
+        Vector_Samples[i]:=Vector_Samples[i-1];
+        END_FOR;
+        OLDT:=TIME_TCK();
+        Vector_Samples[0]:=IN;
+        Cycle_Number:=Cycle_Number+1;
+    ELSE
+        NEWT:=TIME_TCK();
+        IF NEWT >= OLDT THEN
+            TIME_ELAPSED:=TIME_TO_DINT(NEWT-OLDT);
+        ELSE 
+            OLDT:=DINT_TO_TIME(2147483647)-OLDT;
+            TIME_ELAPSED:=TIME_TO_DINT(NEWT+OLDT);
+        END_IF;
+        IF TIME_ELAPSED >= Sample_Time THEN
+            FOR i:= Number_Samples-1 TO 1 BY -1 DO
+            Vector_Samples[i]:=Vector_Samples[i-1];
+            END_FOR;
+            OLDT:=NEWT;
+            Vector_Samples[0]:=IN;
+            Cycle_Number:=Cycle_Number+1;
+            IF Cycle_Number > Number_Samples+10 THEN
+                Cycle_Number:=Number_Samples+10;
+            END_IF;
+        END_IF; 
+    END_IF;
+    
+    //Calculation of average
+    Temp_AVG:=0.0;
+    IF Cycle_Number < Number_Samples THEN
+        FOR i:= 0 TO Cycle_Number-1 BY 1 DO
+        Temp_AVG:=Temp_AVG+Vector_Samples[i];
+        END_FOR;
+    OUT:=Temp_AVG/Cycle_Number;
+    ELSE
+        FOR i:= 0 TO Number_Samples-1 BY 1 DO
+        Temp_AVG:=Temp_AVG+Vector_Samples[i];
+        END_FOR;
+    OUT:=Temp_AVG/Number_Samples;
+    END_IF;    
+   
+END_FUNCTION_BLOCK
+

@@ -1,0 +1,59 @@
+TYPE UDT25
+//RESETSUM_UDT///////////////////////////////////////////////////////////////////////////////////
+
+Author:'RJ'
+    STRUCT
+    RCNT:REAL;
+    GAIN:REAL;
+    TRST:REAL;
+    END_STRUCT
+END_TYPE
+
+
+
+FUNCTION FC29 : VOID 
+//RESETSUM///////////////////////////////////////////////////////////////////////////////////////
+
+Author:'RJ'
+VAR_TEMP
+    TEMP:REAL;
+    RCNT:REAL;
+    GAIN:REAL;
+    TRST:REAL;
+END_VAR
+
+VAR_INPUT
+    FFLG:BOOL;
+    RSET:BOOL;
+    RUN:BOOL;
+    IN:REAL;
+    Param:UDT25;
+END_VAR
+
+//VAR_OUTPUT
+//    FOUT:REAL;
+//END_VAR
+
+VAR_IN_OUT
+    OUT:REAL;
+END_VAR
+
+    RCNT:=Param.RCNT;
+    GAIN:=Param.GAIN;
+    TRST:=Param.TRST;
+    IF TRST <> 0 THEN
+        OUT:=TRST;
+    END_IF;
+    IF RUN = TRUE THEN
+        TEMP:=OUT+(GAIN*IN);
+    END_IF;
+ //   IF FFLG = TRUE THEN
+ //       FOUT:=TEMP;
+ //   END_IF;
+    IF RSET = TRUE THEN
+        OUT:=RCNT; 
+    ELSE
+        OUT:=TEMP;
+    END_IF;
+  
+END_FUNCTION

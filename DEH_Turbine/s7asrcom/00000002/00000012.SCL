@@ -1,0 +1,35 @@
+TYPE UDT9
+AUTHOR : 'Sabeeh'
+
+    STRUCT
+    // Type Description
+    DBAN : REAL;
+    END_STRUCT
+END_TYPE
+
+
+FUNCTION FC32 : VOID
+
+AUTHOR : 'Sabeeh'
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+IN1 : REAL;
+STPT : REAL;
+PARA_VAl : UDT9;
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+FLAG : BOOL;
+END_VAR
+
+IF IN1 < STPT THEN
+    FLAG := TRUE;
+ELSIF IN1 > (STPT + PARA_VAl.DBAN) THEN 
+    FLAG := FALSE;
+END_IF;
+
+END_FUNCTION

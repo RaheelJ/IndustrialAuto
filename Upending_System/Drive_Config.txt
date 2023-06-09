@@ -1,0 +1,33 @@
+1LE10011bb234afa
+
+Control structure:
+  Open-loop/closed-loop control operating mode: [0] U/f control with linear characteristic
+I/O configuration:
+  Macro drive unit: No selection
+Drive setting:
+  Power unit application: [0] Load duty cycle with high overload for vector drives
+  Drive unit line supply voltage: 400 V
+  IEC/NEMA mot stds: [0] IEC-Motor (50 Hz, SI units)
+Motor:
+  Motor type selection: [10] 1LE1 induction motor (not a code number)
+  Number of motors connected in parallel: 1 
+Motor data:
+  Motor configuration: 0001H 
+  Rated motor voltage: 400 Vrms
+  Rated motor current: 8.20 Arms
+  Rated motor power: 4.00 kW
+  Rated motor power factor: 0.810 
+  Rated motor frequency: 50.00 Hz
+  Rated motor speed: 1460.0 rpm
+  Motor cooling type: [0] Natural ventilation
+Important parameters:
+  Current limit: 6.00 Arms
+  Minimum speed: 0.000 rpm
+  Maximum speed: 1500.000 rpm
+  Ramp-function generator ramp-up time: 1.000 s
+  Ramp-function generator ramp-down time: 1.000 s
+  OFF3 ramp-down time: 0.000 s
+Drive functions:
+  Technology application: [0] Standard drive
+  Motor data identification and rotating measurement: [1] Identifying motor data and optimizing the speed controller
+  Automatic calculation motor/control parameters: [1] Complete calculation

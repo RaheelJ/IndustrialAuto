@@ -1,0 +1,430 @@
+;===============================================================
+; GSD-Datei für Artikel 6FX2001-xxxxx, SIEMENS
+; Version : (V2.2)-(Ansprechpartner Hr. Rechinger +49(0)9131/98-3955)
+; Copyright (C) SIEMENS AG 2003
+; All Rights Reserved. 
+;=============================================================== 
+; Dateiname:         SIEM81A8.gsg
+; Datum:      			  8.1.2014	         
+;========================================================================================
+; -------------------------------------------------------------------------------------------
+; Revision:		1.5
+; Date:		 		11.08.2011
+;		
+; Author : 	Herr Abolfazl Toosibashi 
+;					ESYSE GmbH 
+;					Embedded Systems Engineering 
+;					Quirinstr.1
+;					40545 Düsseldorf 
+;					Tel.:   +49 (0)211-46830176
+;					Fax :   +49 (0)211-46834999
+;					Mobile: +49 (0)173-8309802
+;					E-Mail: toosibashi@esyse.de
+;					Internet: www.esyse.com
+; -------------------------------------------------------------------------------------------
+; Changes:		Adaptation to ProfiDrive Profile Version 4.1 
+; 
+; Enhancement:  - Class 4 functionality 	Octet 4 Bit 1
+;				- G1_XIST1 Preset control 	Octet 4 Bit 2
+;				- Scaling function control 	Octet 4 Bit 3 
+;				- Alarm channel control 	Octet 4 Bit 4  Only supported in compatibility mode			
+;				- Compatibility mode 		Octet 4 Bit 5  
+;				- SIEMENS Telegram 860
+;				- Velocity measuring unit
+;				- Parametrization priority
+;				- Velocity reference N2/N4 (R/min)
+; -------------------------------------------------------------------------------------------
+; Revision:		1.6
+; Date:		 		6.5.2012
+;
+; Author : 		Mr. Abolfazl Toosibashi
+; Changes:		Bugfixes 
+; 
+; Enhancement:		- Changed T_PLL_W_MAX to Jitter time = 1µs
+;							- Changed Software version to 9.x
+;							- Changed Telegram 860 to 861 without velocity
+;							- Enabling C2 Class 2 functionality
+; -------------------------------------------------------------------------------------------
+; Revision:		1.7
+; Date:		 		27.7.2012
+;
+; Author : 		Mr. Reiner Bätjer
+; Changes:		Bugfixes 
+; 
+; Enhancement:  - from Model_Name="SIMODRIVE sensor isochron V1.6" to "MC-ENCODER isochron V1.7"
+; -------------------------------------------------------------------------------------------
+; Revision:		1.8
+; Date:		 		25.1.2013
+;
+; Author : 		Mr. Reiner Bätjer
+; Changes:		Bugfixes 
+; 
+; Enhancement:	- Changed back T_PLL_W_MAX to Jitter time = 20µs
+;						- Change GSD Revision from 4 to 5
+; -------------------------------------------------------------------------------------------
+; Revision:		1.9
+; Date:		 		25.1.2013
+;
+; Author : 		Mr. Reiner Bätjer
+; Changes:		Bugfixes 
+; 
+; Enhancement:	- Changed T_PLL_W_MAX to Jitter time = 2µs
+;						- Change GSD Revision from 5 to 4
+; -------------------------------------------------------------------------------------------
+; Revision:		2.0
+; Date:		 		5.2.2013
+;
+; Author : 		Mr. Reiner Bätjer
+; Changes:		Add "Max_Initiate_PDU_Length=244"
+; 
+; -------------------------------------------------------------------------------------------
+; Revision:		2.1
+; Date:		 		29.05.2013+11.07.2013
+;
+; Author : 		Mr. Andreas Uhl + Mr. Reiner Bätjer
+; Changes:		Adaptation of info text and device name according to common standard
+; 
+; -------------------------------------------------------------------------------------------
+; Revision:		2.2
+; Date:		 		8.1.2014
+;
+; Author : 		Mr. Reiner Bätjer
+; Changes:		Changed back T_PLL_W_MAX to Jitter time = 20µs
+;  
+; -------------------------------------------------------------------------------------------
+; Revision:		2.3
+; Date:		 		18.04.2014
+;
+; Author : 		Mr. Abolfazl Toosibashi ESYSE GmbH
+; Changes:		Changed back T_PLL_W_MAX to Jitter time = 2µs
+; Diagnose:		Standard-Telegramm 81 Command Not Supported (27)
+; 
+; -------------------------------------------------------------------------------------------
+; Revision:		2.4
+; Internal  
+; -------------------------------------------------------------------------------------------
+; Revision:		2.5
+; Date:		 	01.08.2014
+;
+; Author : 		Mr. Abolfazl Toosibashi ESYSE GmbH
+; Changes:		Class 4 functionality off, due to IsoM Timing Ti = 125 us.
+;
+;========================================================================================
+
+#Profibus_DP
+;
+
+;--- Parameter text -----------------------------------------------------
+
+PrmText=1
+Text(0)="in Uhrzeigerrichtung"
+Text(1)="entgegen der Uhrzeigerrichtung"
+EndPrmText
+
+PrmText=2
+Text(0)="Ausgeschaltet"
+Text(1)="Eingeschaltet"
+EndPrmText
+
+
+PrmText=3
+Text(1)="Ausgeschaltet"
+Text(0)="Eingeschaltet"
+EndPrmText
+
+
+PrmText=4
+Text(0) = "PRM"
+Text(1) = "PD-Param"
+Text(2) = "PRM+PD-Param"		
+EndPrmText
+
+
+ExtUserPrmData=1 "Positiver Drehsinn"
+Bit(0) 0 0-1
+Prm_Text_Ref=1
+EndExtUserPrmData
+
+ExtUserPrmData=2 "Encoder Class 4 Funktionalität"
+Bit(1) 0 0-1
+Prm_Text_Ref=2
+EndExtUserPrmData
+
+ExtUserPrmData=3 "Preset beeinflusst XIST1"
+Bit(2) 1 0-1
+Prm_Text_Ref=3
+EndExtUserPrmData
+
+ExtUserPrmData=4 "Skalierungsfunktion"
+Bit(3) 0 0-1
+Prm_Text_Ref=2
+EndExtUserPrmData
+
+ExtUserPrmData=5 "Diagnose über Alarmkanal"
+Bit(4) 0 0-1
+Prm_Text_Ref=2
+EndExtUserPrmData
+
+ExtUserPrmData=6 "Kompatibilitätsmodus V3.1"
+Bit(5) 1 0-1
+Prm_Text_Ref=3
+EndExtUserPrmData
+
+ExtUserPrmData=7 "Auflösung pro Umdrehung"
+Unsigned32 8192 0-8192
+EndExtUserPrmData
+
+
+ExtUserPrmData=8 "Gesamtauflösung"
+Unsigned32  134217728 0-134217728
+EndExtUserPrmData
+
+ExtUserPrmData=9 "Tolerierte Lebenszeichenfehler"
+Unsigned8 1 0-255
+EndExtUserPrmData
+
+ExtUserPrmData=10 "Parametrierhoheit"
+Unsigned8 0 0-3
+Prm_Text_Ref=4
+EndExtUserPrmData
+
+
+
+
+;--- general: -----------------------------------------------------
+
+GSD_Revision        =  4
+Vendor_Name         = "SIEMENS AG"
+Model_Name          = "MC-ENCODER isochron"
+Revision            = "2.5"
+Ident_Number        = 0x81A8
+Protocol_Ident      = 0 ; 0 = PROFIBUS DP
+Station_Type        = 0 ; 0 = DP Slave
+FMS_supp            = 0 ; 0 = FMS not supported
+Hardware_Release    = "V6.0"
+Software_Release    = "V9.x"
+DP_Encoder_class = 4
+DP_Encoder_profile_version = 4.1
+DP_Encoder_manufacturer_specific_functions = 1
+
+;
+9.6_supp            = 1
+19.2_supp           = 1
+45.45_supp          = 1
+93.75_supp          = 1
+187.5_supp          = 1
+500_supp            = 1
+1.5M_supp           = 1
+3M_supp             = 1
+6M_supp             = 1
+12M_supp            = 1
+;
+
+MaxTsdr_9.6    		= 15
+MaxTsdr_19.2 		= 15
+MaxTsdr_45.45   	= 15
+MaxTsdr_93.75 		= 15
+MaxTsdr_187.5 		= 15
+MaxTsdr_500 		= 15
+MaxTsdr_1.5M 		= 20
+MaxTsdr_3M 			= 35
+MaxTsdr_6M 			= 50
+MaxTsdr_12M 		= 95
+;
+
+
+
+Redundancy          = 0
+Repeater_Ctrl_Sig   = 0
+24V_Pins            = 0
+Implementation_Type = "VPC3+S"
+Bitmap_Device       = "AWG81A8"
+
+;--- user-defined -------------------------------------------------
+OrderNumber="6FX2001-5xPxx"
+;
+;--- slave basic -------------------------------------------------------
+Freeze_Mode_supp    = 1
+Sync_Mode_supp      = 1
+Auto_Baud_supp      = 1
+Set_Slave_Add_supp  = 1
+Ident_Maintenance_supp = 1
+;
+
+;--- Slave related keywords for DXB -------------------------------
+Publisher_supp				= 1
+;Subscriber_supp				= 0
+;DXB_Max_Link_Count			= (used for Subscribers)
+;DXB_Max_Data_Length		= (used for Subscribers)
+Prm_Block_Structure_supp = 1
+Prm_Block_Structure_req  = 1
+
+;--- User Parameter -------------------------------------------------------
+
+Max_User_Prm_Data_Len= 61
+Ext_User_Prm_Data_Const(0) = 0x00,0x00,0x08 ; DPV1_Status
+
+; Structure: User_Prm_data -> Header
+Ext_User_Prm_Data_Const(3) = 0x15 ; Structure_Length = 21
+Ext_User_Prm_Data_Const(4) = 0x81 ; Structure_Type 	 = 129 (User_Prm_data)
+Ext_User_Prm_Data_Const(5) = 0x00 ; Slot Number    	 = 0
+Ext_User_Prm_Data_Const(6) = 0x00 ; Reserved		 = 0
+
+Ext_User_Prm_Data_Const(7)= 0x24 ; Bit fields:
+; Bit(0) = Code sequence 			= 0 -> Disabled (Default) ,
+; Bit(1) = Class 4 functionality 	= 0 -> Disabled (Default) ,
+; Bit(2) = G1_XIST1 Preset control 	= 1 -> Disabled ,
+; Bit(3) = Scaling function control = 0 -> Disabled ,
+; Bit(4) = Alarm channel control 	= 0 -> Disabled (Default)
+; Bit(5) = Compatibility mode 		= 1 -> Disabled (Default)
+
+Ext_User_Prm_Data_Const(8) = 0x00,0x00,0x20,0x00	; Measuring Unit Per Revolution = 8192 -> 13 Bits (Default)
+Ext_User_Prm_Data_Const(12)= 0x08,0x00,0x00,0x00	; Total Measuring Range = 134217728 -> 27 Bit (Default) 
+Ext_User_Prm_Data_Const(16)= 0x01 			     		; Max Master Sign-Of-Life Failures  = 1 (Default)
+Ext_User_Prm_Data_Const(17)= 0x00				 				; Not Supported velocity Measuring Unit	= 4 N2/N4 (Default)
+Ext_User_Prm_Data_Const(18)= 0x00,0x00,0x00,0x00,0x00,0x00 ; Reserved 15-20     = 0
+Ext_User_Prm_Data_Ref(7)=1		; Code sequence
+Ext_User_Prm_Data_Ref(7)=2		; Class 4 functionality
+Ext_User_Prm_Data_Ref(7)=3		; G1_XIST1 Preset control
+Ext_User_Prm_Data_Ref(7)=4		; Scaling function control
+Ext_User_Prm_Data_Ref(7)=5		; Alarm channel control
+Ext_User_Prm_Data_Ref(7)=6		; Compatibility mode
+Ext_User_Prm_Data_Ref(8)=7  	; measuring unit per revolution
+Ext_User_Prm_Data_Ref(12)=8 	; total resolution 
+Ext_User_Prm_Data_Ref(16)=9	; maximum failures masters sign of life; Only supported in compatibility mode
+
+
+;----- Manufacturer Specific Block (32)  ---------------------------------------------------
+; Structure:  -> Header
+Ext_User_Prm_Data_Const(24)= 0x05 ; Structure_Length = 5
+Ext_User_Prm_Data_Const(25)= 0x20 ; Structure_Type	 = Manufacturer Specific Block (32)
+Ext_User_Prm_Data_Const(26)= 0x00 ; Slot Number      = 0
+Ext_User_Prm_Data_Const(27)= 0x00 ; Reserved		 = 0
+
+; Manufacturer Specific parameter:
+Ext_User_Prm_Data_Const(28)= 0x00	; Parameterization highness = 0 -> PRM
+Ext_User_Prm_Data_Ref(28)=10			; Parametrierhoheit
+
+;------------------------------------------------------------------------------------------
+
+
+
+Min_Slave_Intervall = 1
+Modular_Station     = 1
+Max_Module          = 1   			; max. 
+Max_Input_Len       = 12  			; max. 12 Byte (LZ + Status + actual value 1 + actaul value 2)
+Max_Output_Len      = 4   			; max. 8 Byte  (LZ + Control) 
+Max_Data_Len        = 16  			; total of max input and max output
+Modul_Offset        = 1    		; slot 0 references whole device
+
+;Unit_Diag_Bit         = 0
+;Unit_Diag_Not_Bit     = 0
+;Unit_Diag_Area        = 0
+;Unit_Diag_Value       = 0
+;Unit_Diag_Value_Ref   = 0
+;Unit_Diag_Type        = 0
+
+;Channel_Diag          = 0
+Fail_Safe             = 1
+Max_Diag_Data_Len     = 9
+Slave_Family          = 7
+;Diag_Update_Delay     = 0
+;Fail_Safe_required    = 0
+Info_Text					   = "Absolutwertgeber MC-ENCODER - 13/27 Bit - DPV1/DPV2 - Taktsynchronität und Querverkehr - Profile Encoder V4.1 Class2 Class 4 konform - Verwendbar ab Ausführungsstand A16 - GSD-Revision V2.1 - 11.07.2013"
+	
+;Channel_Diag (2) = "Unterspannung"
+;Channel_Diag (3) = "Überspannung"
+;Channel_Diag (5) = "Übertempratur"
+Channel_Diag (22) = "Positionsfehler"
+Channel_Diag (24) = "Speicherfehler"
+Channel_Diag (25) = "Lebenszeichenfehler"
+Channel_Diag (26) = "Synchronisationsfehler"
+Channel_Diag (27) = "G1_STW Kommando-Fehler"
+
+;--- Slave related keywords for DP extensions ---------------------
+DPV1_Slave						= 1
+Max_Initiate_PDU_Length=244
+C1_Read_Write_supp			= 1
+C2_Read_Write_supp			= 1
+C1_Max_Data_Len				= 240 	; maximale Datenlänge ohne Header
+C2_Max_Data_Len				= 240
+C1_Response_Timeout     = 1000 	; Zeitbasis 10 ms
+C2_Response_Timeout     = 1000
+;C1_Read_Write_required	= 0
+;C2_Read_Write_required	= 0
+C2_Max_Count_Channels		= 1
+;Max_Initate_PDU_Length	= 244
+;Diagnostic_Alarm_supp	= 0
+;Process_Alarm_supp			= 0
+;Pull_Plug_Alarm_supp		= 0
+;Status_Alarm_supp			= 0
+;Update_Alarm_supp			= 0
+;Manufacturer_Specific_Alarm_supp	= 0
+;Extra_Alarm_SAP_supp			= 0
+;Alarm_Sequence_Mode_Count	= 0
+;Alarm_Type_Mode_supp			= 0
+;Diagnostic_Alarm_required	= 0
+;Process_Alarm_required		= 0
+;Pull_Plug_Alarm_required	= 0
+;Status_Alarm_required		= 0
+;Update_Alarm_required		= 0
+;Manufacturer_Specific_Alarm_required	= 0
+;DPV1_Data_Types					= 0
+WD_Base_1ms_supp					= 1
+;Check_Cfg_Mode					= 0
+
+
+;---  Slave related keywords for Isochron Mode --------------------
+Isochron_Mode_supp     	= 1
+Isochron_Mode_required 	= 0
+TBASE_DP               	= 1500 	; entspricht 125us
+TDP_MIN				  	= 8   	; entspricht 500µs
+TDP_MAX	               	= 256 	; equal to 32ms
+T_PLL_W_MAX           	= 24	; equal to 2us
+TBASE_IO               	= 1500	; entspricht 125us
+TI_MIN                 	= 1		; entspricht 125 us
+TO_MIN                 	= 1		; entspricht 125 µs
+
+
+
+
+
+;---  Module ------------------------------------------------------
+
+Module= "Standard Telegramm 81" 0xC3,0xC1,0xC5,0xFD,0x00,0x51 ; Telegram 81: 2 words output, 6 words input
+01
+Info_Text ="Standard Telegramm 81 für Geber: 1 Lagegeber, Lebenszeichen, Diagnose, PZD-Länge 2/6 Worte." 
+EndModule
+
+Module= "SIEMENS Telegramm 861" 0xC3,0xC1,0xC1,0xFD,0x03,0x5D ; Telegram 861: 2 words output, 4 words input
+02
+Info_Text = "SIEMENS Telegramm 861 für Geber: Lageistwert 32-Bit, Lage-Presetwert 32-Bit, PZD-Länge 2/2 Worte."
+EndModule
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

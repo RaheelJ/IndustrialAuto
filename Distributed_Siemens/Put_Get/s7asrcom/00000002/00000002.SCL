@@ -1,0 +1,45 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+DATA_BLOCK DB51
+TITLE = 'Send_DB'
+//
+// Insert a variable for every memory variable that are to be sent to partner CPU
+//
+AUTHOR: 'RJ'
+     
+STRUCT
+//OPC////////////////////////////////////////////////////////////
+
+//OA/////////////////////////////////////////////////////////////
+ATCHOLD:BOOL;
+ATSVPLPB:BOOL;
+DEHDMD:REAL;
+ATCASPB:REAL;
+ATCPERM:BOOL;
+
+END_STRUCT
+
+BEGIN
+
+END_DATA_BLOCK
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+FUNCTION FC201 : VOID
+
+TITLE = 'Memory_to_DB'
+//
+// To move data from memory variables to DB variables 
+//
+AUTHOR: 'RJ'
+
+DB51.ATCHOLD:=ATCHOLD;
+DB51.ATSVPLPB:=ATSVPLPB;
+DB51.DEHDMD:=DEHDMD;
+DB51.ATCASPB:=ATCASPB;
+DB51.ATCPERM:=ATCPERM;
+
+END_FUNCTION
+
+
+
+

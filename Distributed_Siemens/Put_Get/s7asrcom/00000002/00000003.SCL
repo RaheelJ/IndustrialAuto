@@ -1,0 +1,80 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+DATA_BLOCK DB50
+
+TITLE = 'Receive_DB'
+//
+// Insert a variable for every memory variable that are to be received by partner CPU
+//
+AUTHOR: 'RJ'
+     
+STRUCT
+//OPC/////////////////////    
+    BR:REAL;
+    ASL:REAL;
+    MWPERCT:REAL;
+    MWFAIL:BOOL;
+    WS:REAL;
+    WSFAIL:BOOL;
+//OA/////////////////////
+    REFDMD:REAL;
+    TRCOM:REAL;
+    GVPOSL:REAL;
+    RPM3:REAL;
+    RPMM2:REAL;
+    RPM1:REAL;
+    RPMM1:REAL;
+    RPMM5:REAL;
+    RPM5:REAL;
+    RPMM4:REAL;
+    RPM2:REAL;
+    RPMM3:REAL;
+    RPM4:REAL;
+    DEMAND:REAL;
+    ADS:BOOL;
+    ATC:BOOL;
+    
+END_STRUCT
+
+BEGIN
+
+END_DATA_BLOCK
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+FUNCTION FC200 : VOID
+
+TITLE = 'DB_to_Memory'
+//
+// To move data from DB variables to memory variables
+//
+AUTHOR: 'RJ'
+
+BR:=DB50.BR;
+ASL:=DB50.ASL;
+MWPERCT:=DB50.MWPERCT;
+MWFAIL:=DB50.MWFAIL;
+WS:=DB50.WS;
+WSFAIL:=DB50.WSFAIL;
+REFDMD:=DB50.REFDMD;
+TRCOM:=DB50.TRCOM;
+GVPOSL:=DB50.GVPOSL;
+RPM3:=DB50.RPM3;
+RPMM2:=DB50.RPMM2;
+RPM1:=DB50.RPM1;
+RPMM1:=DB50.RPMM1;
+RPMM5:=DB50.RPMM5;
+RPM5:=DB50.RPM5;
+RPMM4:=DB50.RPMM4;
+RPM2:=DB50.RPM2;
+RPMM3:=DB50.RPMM3;
+RPM4:=DB50.RPM4;
+DEMAND:=DB50.DEMAND;
+ADS:=DB50.ADS;
+ATC:=DB50.ATC;
+
+END_FUNCTION
+
+
+
+

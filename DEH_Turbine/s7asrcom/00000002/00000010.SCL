@@ -1,0 +1,32 @@
+FUNCTION FC35 : VOID
+
+AUTHOR : 'Sabeeh'
+
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+IN1 : REAL;
+IN2 : REAL;
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+OUT:REAL;
+END_VAR
+
+VAR_TEMP
+    // Temporary Variables
+
+END_VAR
+
+    // Statement Section
+
+IF IN1 < IN2 THEN
+    OUT := IN1;
+ELSE
+    OUT := IN2;
+END_IF;
+ 
+    
+END_FUNCTION

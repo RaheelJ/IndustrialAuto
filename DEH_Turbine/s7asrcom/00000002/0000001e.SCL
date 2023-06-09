@@ -1,0 +1,27 @@
+FUNCTION FC3 : VOID
+
+VAR_INPUT
+    CTime:TIME_OF_DAY;    
+END_VAR
+
+VAR_OUTPUT
+    Hours:INT;
+    Minutes:INT;
+    Seconds:INT;
+END_VAR
+
+VAR
+    INT_Time:DINT;
+    A:DINT;
+    B:DINT;
+END_VAR
+
+    INT_Time:=TOD_TO_DINT(CTime)/1000;      //Time in seconds
+    A:=60*60;                               //Number of seconds in an hour
+    Hours:=DINT_TO_INT(INT_Time/A);
+    INT_Time:=INT_Time MOD A;
+    Minutes:=DINT_TO_INT(INT_Time/60);
+    INT_Time:=INT_Time MOD 60;
+    Seconds:=DINT_TO_INT(INT_Time);
+
+END_FUNCTION

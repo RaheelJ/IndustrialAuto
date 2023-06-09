@@ -1,0 +1,31 @@
+FUNCTION FC5 : void
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+    FLAG : BOOL;
+    IN1_y, IN2_n : REAL;
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+    OUT : REAL;
+END_VAR
+
+VAR_TEMP
+    // Temporary Variables
+
+END_VAR
+
+    // Statement Section
+    //If FLAG = TRUE, then OUT = IN1. If FLAG = FALSE, then OUT = IN2.
+    IF FLAG = TRUE THEN
+        // Statement Section_IF
+        OUT := IN1_y;
+    ELSIF FLAG = FALSE THEN
+        // Statement Section_ELSIF
+        OUT := IN2_n;
+        END_IF;
+
+    END_FUNCTION

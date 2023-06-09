@@ -1,0 +1,1 @@
+# Cost Effective Serialization to Extend the I/O Capabilities of Siemens S7 PLC

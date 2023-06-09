@@ -1,0 +1,42 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+DATA_BLOCK DB3
+
+TITLE = 'Receive_DB'
+//
+// Insert a variable for every memory variable that are to be received by partner CPU
+//
+AUTHOR: 'RJ'
+     
+STRUCT
+    A:BOOL;
+    B:INT;
+    C:REAL;
+    D:WORD;
+    E:DWORD;
+END_STRUCT
+
+BEGIN
+
+END_DATA_BLOCK
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+FUNCTION FC3 : VOID
+
+TITLE = 'DB_to_Memory'
+//
+// To move data from DB variables to memory variables
+//
+AUTHOR: 'RJ'
+
+DB3.A:=AA;
+DB3.B:=BB;
+DB3.C:=CC;
+DB3.D:=DD;
+
+END_FUNCTION
+
+
+
+

@@ -1,0 +1,37 @@
+TYPE UDT1
+AUTHOR : 'Sabeeh'
+
+    STRUCT
+    // Type Description
+    STPT : REAL;
+    DBAN : REAL;
+    END_STRUCT
+END_TYPE
+
+FUNCTION FC11 : VOID
+
+AUTHOR : 'Sabeeh'
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+IN : REAL;
+PARA_VAl : UDT1;
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+OUT : BOOL;
+END_VAR
+
+IF IN > PARA_VAl.STPT THEN
+    // Statement Section_IF
+     OUT := TRUE;
+ELSIF IN < (PARA_VAl.STPT - PARA_VAl.DBAN) THEN
+    // Statement Section_ELSIF
+     OUT := FALSE;
+END_IF;
+
+END_FUNCTION
+

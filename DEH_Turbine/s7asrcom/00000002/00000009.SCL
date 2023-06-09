@@ -1,0 +1,31 @@
+TYPE UDT4
+AUTHOR : 'Sabeeh'
+
+    STRUCT
+    // Type Description
+    GAIN : REAL;
+    BIAS : REAL;
+    END_STRUCT
+END_TYPE
+
+FUNCTION FC14 : VOID
+
+AUTHOR : 'Sabeeh'
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+IN : REAL;
+PARA_VAl : UDT4;
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+OUT : REAL;
+END_VAR
+
+    // Statement Section
+   OUT := (IN * PARA_VAl.GAIN) + PARA_VAl.BIAS ;
+   
+END_FUNCTION

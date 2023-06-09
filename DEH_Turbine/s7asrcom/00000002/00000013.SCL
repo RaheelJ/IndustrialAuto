@@ -1,0 +1,32 @@
+TYPE UDT11
+AUTHOR : 'Sabeeh'
+
+    STRUCT
+    // Type Description
+    GAIN : REAL;
+    BIAS : REAL;
+    END_STRUCT
+END_TYPE
+
+FUNCTION FC40 : VOID
+
+AUTHOR : 'Sabeeh'
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+IN1 : REAL;
+IN2 : REAL;
+PARA_VAl : UDT11;
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+OUT : REAL;
+END_VAR
+
+    // Statement Section
+   OUT := (IN1 * IN2 * PARA_VAl.GAIN) + PARA_VAl.BIAS ;
+   
+END_FUNCTION

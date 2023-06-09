@@ -1,0 +1,59 @@
+TYPE UDT14
+AUTHOR : 'Sabeeh'
+
+    STRUCT
+    // Type Description
+    PVGAIN : REAL;
+    PVBIAS : REAL;
+    CASGAIN : REAL;
+    CASBIAS : REAL;
+    SCALETOP : REAL;
+    SCALEBOT : REAL;
+    END_STRUCT
+END_TYPE
+
+
+
+FUNCTION FC43 : VOID
+
+AUTHOR : 'Sabeeh'
+
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+PV : REAL;
+CAS : REAL;
+PARA_VAl : UDT14;
+
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+OUTPUT : REAL;
+END_VAR
+
+VAR_TEMP
+    // Temporary Variables
+PVGB : REAL;
+CASGB : REAL;
+END_VAR
+
+    // Statement Section
+PVGB := (PV * PARA_VAl.PVGAIN) + PARA_VAl.PVBIAS;
+CASGB := (CAS * PARA_VAl.CASGAIN) + PARA_VAl.CASBIAS;
+OUTPUT := PVGB + CASGB;
+////////////////////////////////////////////////////
+// I HAVE DOUBT ABOUT THIS ALGORITHM, I.E IT 
+// IMMEDIATLEY FIRST ASSIGNS VALUES TO THE OUTPUT AND CHECKS CONDITIONS 
+// AFTERWARDS. I NEED TO OBSERVE THE SIEMENS HARDWARE BEHAVIOR FOR THIS.
+///////////////////////////////////////////////////
+
+IF OUTPUT >= PARA_VAl.SCALETOP THEN
+    OUTPUT := PARA_VAl.SCALETOP;
+ELSIF OUTPUT <= PARA_VAl.SCALEBOT THEN
+    OUTPUT := PARA_VAl.SCALEBOT;
+END_IF;
+
+END_FUNCTION

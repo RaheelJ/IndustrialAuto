@@ -1,0 +1,9 @@
+00000000 0 0 0 0 0 $Version1
+00000000 0 0 0 0 0 Date:  06/13/2017  Time of Day::  11:26:43 AM
+00000000 0 0 0 0 0 Downloading...
+00000000 0 0 0 0 0 I-Device\SIMATIC 300\CPU 319-3 PN/DP\S7 Program(1)\Blocks
+40000000 0 0 0 0 0 Block 'OB1' already exists on the CPU and has not be downloaded as a result.
+40000000 0 0 0 0 0 Block 'OB82' already exists on the CPU and has not be downloaded as a result.
+40000000 0 0 0 0 0 Block 'OB85' already exists on the CPU and has not be downloaded as a result.
+40000000 0 0 0 0 0 Block 'OB86' already exists on the CPU and has not be downloaded as a result.
+0 0 0 0 0 0 'Downloading': For 0 of 4 objects successful.

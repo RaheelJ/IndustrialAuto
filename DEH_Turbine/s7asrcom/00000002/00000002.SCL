@@ -1,0 +1,101 @@
+TYPE UDT21
+//UDT for AIFCTGEN
+
+    STRUCT
+    R:ARRAY[1..9] OF REAL;
+    S:ARRAY[1..9] OF REAL;  
+    NMBP:INT;
+    END_STRUCT
+
+END_TYPE
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+FUNCTION FC7 : INT
+//Binary Search
+
+VAR_TEMP
+    bound:ARRAY[1..2] OF INT; 
+    n:INT;
+END_VAR
+
+VAR_INPUT 
+    Size:INT;
+    A:ARRAY[1..9] OF REAL;
+    Key:REAL;
+END_VAR
+
+    bound[1]:=1;
+    bound[2]:=Size;
+    WHILE (bound[2]<>bound[1]+1) DO
+        n:=(bound[1]+bound[2])/2;
+        IF Key = A[n] THEN
+            FC7:=n;
+            RETURN;
+        ELSIF Key > A[n] THEN
+            bound[1]:=n;
+        ELSE
+            bound[2]:=n;
+        END_IF;
+    END_WHILE;
+
+FC7:=bound[1];    
+END_FUNCTION
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+FUNCTION FC6 : VOID 
+//AIFCT Function
+
+Author:'RJ'
+VAR_TEMP
+    // Temporary Variables
+    i:INT;
+    Slope:REAL;
+END_VAR
+
+VAR
+    NMBP:INT;
+    R:ARRAY[1..9] OF REAL;
+    S:ARRAY[1..9] OF REAL;
+    Quality:BOOL;                   //1=Bad, 0=Fair
+END_VAR
+
+VAR_INPUT
+    IN1:REAL;
+    Parameters:UDT21;    
+END_VAR
+
+VAR_OUTPUT
+    OUT:REAL;
+END_VAR
+    
+    R:=Parameters.R;
+    S:=Parameters.S;
+    NMBP:=Parameters.NMBP;
+    
+    IF IN1 > R[NMBP] THEN           //Saturate at max. value of function if exceeds it
+        OUT:=S[NMBP];
+        Quality:=1;
+    ELSIF IN1 < R[1] THEN           //Saturate at min. value of function if violates it
+        OUT:=S[1];
+        Quality:=1;
+    ELSE
+        i:=FC7(Size := NMBP  // IN: INT
+         ,A := R  // IN: ARRAY
+         ,Key := IN1  // IN: REAL
+         ); // INT
+        Slope:=(S[i+1]-S[i])/(R[i+1]-R[i]);
+        OUT:=Slope*(IN1-R[i])+S[i];
+        Quality:=0;
+    END_IF;
+       
+END_FUNCTION
+
+
+
+
+
+

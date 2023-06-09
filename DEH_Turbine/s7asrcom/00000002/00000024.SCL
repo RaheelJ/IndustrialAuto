@@ -1,0 +1,52 @@
+TYPE UDT15
+AUTHOR : 'Sabeeh'
+
+    STRUCT
+    // Type Description
+    PV_YGAIN : REAL;
+    PV_YBIAS : REAL;
+    CAS_NGAIN : REAL;
+    CAS_NBIAS : REAL;
+    SCALETOP : REAL;
+    SCALEBOT : REAL;
+    END_STRUCT
+END_TYPE
+
+
+
+FUNCTION FC44 : VOID
+
+AUTHOR : 'Sabeeh'
+
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+PV_Y : REAL;
+CAS_N : REAL;
+FLAG : BOOL;
+PARA_VAl : UDT15;
+
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+OUTPUT : REAL;
+END_VAR
+
+    // Statement Section
+IF FLAG = TRUE THEN
+    OUTPUT := (PV_Y * PARA_VAl.PV_YGAIN) + PARA_VAl.PV_YBIAS;
+ELSE
+    OUTPUT := (CAS_N * PARA_VAl.CAS_NGAIN) + PARA_VAl.CAS_NBIAS;
+END_IF;
+
+    
+IF OUTPUT >= PARA_VAl.SCALETOP THEN
+    OUTPUT := PARA_VAl.SCALETOP;
+ELSIF OUTPUT <= PARA_VAl.SCALEBOT THEN
+    OUTPUT := PARA_VAl.SCALEBOT;
+END_IF;
+
+END_FUNCTION

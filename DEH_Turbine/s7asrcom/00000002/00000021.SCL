@@ -1,0 +1,48 @@
+TYPE UDT10
+AUTHOR : 'Sabeeh'
+
+    STRUCT
+    // Type Description
+    GAIN : REAL := 1.000000e+000;
+    BIAS : REAL := 0.000000e+000;
+    SCLTOP : REAL := 100.000000e+000;
+    SCLBTM: REAL := -100.000000e+000;
+
+    END_STRUCT
+END_TYPE
+
+
+FUNCTION FC34 : VOID
+
+AUTHOR : 'Sabeeh'
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+CAS : REAL;
+PARA_VAl : UDT10;
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+OUT : REAL;
+END_VAR
+
+VAR_TEMP
+    // Temporary Variables
+TEMP : REAL;
+END_VAR
+
+TEMP := (CAS * PARA_VAl.GAIN) + PARA_VAl.BIAS;
+
+IF TEMP >= PARA_VAl.SCLTOP THEN
+    OUT := PARA_VAl.SCLTOP;
+ELSIF TEMP <= PARA_VAl.SCLBTM THEN
+    OUT := PARA_VAl.SCLBTM;
+ELSE
+    OUT := TEMP;
+END_IF;
+
+END_FUNCTION
+

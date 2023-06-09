@@ -1,0 +1,37 @@
+TYPE UDT8
+AUTHOR : 'Sabeeh'
+
+    STRUCT
+    // Type Description
+    DBAN : REAL;
+    END_STRUCT
+END_TYPE
+
+FUNCTION FC31 : VOID
+
+AUTHOR : 'Sabeeh'
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+IN : REAL;
+STPT : REAL;
+
+PARA_VAl : UDT8;
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+OUT : BOOL;
+END_VAR
+
+IF IN > STPT THEN
+    // Statement Section_IF
+     OUT := TRUE;
+ELSIF IN < (STPT - PARA_VAl.DBAN) THEN
+    // Statement Section_ELSIF
+     OUT := FALSE;
+END_IF;
+
+END_FUNCTION

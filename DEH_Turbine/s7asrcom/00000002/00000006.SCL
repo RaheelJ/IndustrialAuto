@@ -1,0 +1,41 @@
+
+TYPE UDT22
+//DIVIDEGB_UDT
+Author:'RJ'
+    STRUCT
+    GAIN:REAL;
+    BIAS:REAL;
+    END_STRUCT
+END_TYPE
+
+
+
+FUNCTION FC21 : VOID 
+//DIVIDEGB
+Author:'RJ'
+VAR_TEMP
+    GAIN:REAL;
+    BIAS:REAL;
+END_VAR
+
+VAR_INPUT
+    IN1_Top:REAL;
+    IN2_Side:REAL;
+    Param:UDT22;
+END_VAR
+
+VAR_OUTPUT
+    OUT:REAL;
+END_VAR
+
+    GAIN:=Param.GAIN;
+    BIAS:=Param.BIAS;
+    IF IN2_Side <> 0 THEN
+        OUT:=GAIN*(IN1_Top/IN2_Side)+BIAS;
+    ELSIF IN1_Top >= 0 THEN
+        OUT:=3.4*(10**30);
+    ELSE
+        OUT:=-3.4*(10**30);
+    END_IF;
+
+END_FUNCTION

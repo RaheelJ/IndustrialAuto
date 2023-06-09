@@ -1,0 +1,78 @@
+TYPE UDT13
+AUTHOR : 'RJ'
+    STRUCT
+    // Type Description
+    OLDIN : REAL;
+    OLDT: TIME;
+    i: INT;
+    PRATE : REAL;
+    NRATE : REAL;
+    PDB : REAL;
+    NDB : REAL;
+    END_STRUCT
+END_TYPE
+
+FUNCTION FC42 : VOID
+
+AUTHOR : 'RJ'
+
+// Block Parameters
+VAR_INPUT
+IN : REAL;
+END_VAR
+
+VAR_IN_OUT
+Param : UDT13;
+END_VAR
+
+VAR_OUTPUT
+OUT : BOOL;
+END_VAR
+
+VAR
+    RATE:REAL;
+    NEWT:TIME;
+    TIME_ELAPSED:REAL;
+    OLDIN : REAL;
+    OLDT: TIME;
+    i: INT;
+    PRATE : REAL;
+    NRATE : REAL;
+    PDB : REAL;
+    NDB : REAL;    
+END_VAR
+
+OLDIN := Param.OLDIN;
+OLDT:= Param.OLDT;
+i:= Param.i;
+PRATE := Param.PRATE;
+NRATE := Param.NRATE;
+PDB := Param.PDB;
+NDB := Param.NDB;
+
+IF i = 1 THEN
+    OUT:=FALSE;
+    Param.i:=i+1;
+    Param.OLDT:=TIME_TCK();
+    Param.OLDIN:=IN;
+ELSE
+    NEWT:=TIME_TCK();
+    IF NEWT >= OLDT THEN
+        TIME_ELAPSED:=DINT_TO_REAL(TIME_TO_DINT(NEWT-OLDT))/1000;
+    ELSE 
+        OLDT:=DINT_TO_TIME(2147483647)-OLDT;
+        TIME_ELAPSED:=DINT_TO_REAL(TIME_TO_DINT(NEWT+OLDT))/1000;
+    END_IF;    
+    RATE:=(IN-OLDIN)/TIME_ELAPSED;
+    
+    IF (RATE > PRATE)OR(RATE < 0-NRATE) THEN
+        OUT:=TRUE;
+    ELSIF (RATE < (PRATE-PDB))AND(RATE > (0-(NRATE-NDB))) THEN
+        OUT:=FALSE;
+    END_IF;
+    Param.OLDT:=NEWT;
+    Param.OLDIN:=IN;
+END_IF;
+
+   
+END_FUNCTION

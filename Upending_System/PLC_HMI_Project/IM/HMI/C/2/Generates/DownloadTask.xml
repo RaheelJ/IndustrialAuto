@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DownloadTask>
+  <ProjectInfo
+    DeviceVersion="14.0.1.0"
+    CreationTime="2018-09-28 09:58:55 (UTC)"
+    Runtime="COLORADO"
+    RtProjectName="Upender.HMI[TP1500 Comfort]"
+    RtProjectFolderName="Upender.HMI[TP1500 Comfort]"
+    DeviceType="TP1500 Comfort"
+    DisplayOrientation="0"
+    RTReleaseNo="14.0.1.0"
+    ImageReleaseNo="14.0.1.0"
+    RTCV="14.0.1.0"
+    PRCV="14.0.1.0"
+    FirmwareFileName="CP_15_19_22\14.0.1.0\CP_15_19_22_V14_0_1.fwf"
+    RuntimeFileName="CP_15_19_22\14.0.1.0\CP_15_19_22_V14_0_1.ruf"
+    RuntimeAddonFolderName="CP_15_19_22" />
+  <FullDownload>pdata.fwc</FullDownload>
+  <FullDownload
+    type="ADMINDATA">pdata.pwx</FullDownload>
+  <FullDownload>ProjectSettings.hsf</FullDownload>
+  <FullDownload>DeviceSettings.hsf</FullDownload>
+</DownloadTask>

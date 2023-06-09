@@ -1,0 +1,37 @@
+TYPE UDT12
+AUTHOR : 'Sabeeh'
+
+    STRUCT
+    // Type Description
+    WT1 : REAL;
+    WT2 : REAL;
+    END_STRUCT
+END_TYPE
+
+
+
+FUNCTION FC41 : VOID
+
+AUTHOR : 'Sabeeh'
+
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+IN1 : REAL;
+IN2 : REAL;
+PARA_VAl : UDT12;
+
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+OUT : REAL;
+END_VAR
+
+
+
+    // Statement Section
+ OUT := (IN1 * PARA_VAl.WT1) + (IN2 * PARA_VAl.WT2);   
+END_FUNCTION

@@ -1,0 +1,46 @@
+TYPE UDT23
+//POLY_UDT
+
+Author:'RJ'
+    STRUCT
+    CX0:REAL;
+    CX1:REAL;
+    CX2:REAL;
+    CX3:REAL;
+    CX4:REAL;
+    CX5:REAL;
+    END_STRUCT
+END_TYPE
+
+
+FUNCTION FC22 : VOID
+//POLY
+
+Author:'RJ'
+
+VAR
+    CX0:REAL;
+    CX1:REAL;
+    CX2:REAL;
+    CX3:REAL;
+    CX4:REAL;
+    CX5:REAL;
+END_VAR
+
+VAR_INPUT
+    IN:REAL;
+    Param:UDT23;    
+END_VAR
+
+VAR_OUTPUT
+    OUT:REAL;    
+END_VAR
+    
+    CX0:=Param.CX0;
+    CX1:=Param.CX1;
+    CX2:=Param.CX2;
+    CX3:=Param.CX3;
+    CX4:=Param.CX4;
+    CX5:=Param.CX5;
+    OUT:=CX0*(IN**0)+CX1*(IN**1)+CX2*(IN**2)+CX3*(IN**3)+CX4*(IN**4)+CX5*(IN**5);
+END_FUNCTION

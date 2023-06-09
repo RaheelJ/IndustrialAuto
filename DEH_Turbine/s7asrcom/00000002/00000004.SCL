@@ -1,0 +1,37 @@
+TYPE UDT5
+AUTHOR : 'Sabeeh'
+
+    STRUCT
+    // Type Description
+    WT1 : REAL;
+    WT2 : REAL;
+    END_STRUCT
+END_TYPE
+
+
+
+FUNCTION FC15 : VOID
+
+AUTHOR : 'Sabeeh'
+
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+IN1_p : REAL;
+IN2_n : REAL;
+PARA_VAl : UDT5;
+
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+OUT : REAL;
+END_VAR
+
+
+
+    // Statement Section
+ OUT := (IN1_p * PARA_VAl.WT1) - (IN2_n * PARA_VAl.WT2);   
+END_FUNCTION

@@ -1,0 +1,63 @@
+TYPE UDT16
+//XHISEL_UDT/////////////////////////////////////////////////////////////////////////////////
+
+    STRUCT
+    PV_GAIN:REAL;
+    PV_BIAS:REAL;
+    CAS_GAIN:REAL;
+    CAS_BIAS:REAL;
+    SCALE_TOP:REAL;
+    SCALE_BOT:REAL;
+    END_STRUCT
+END_TYPE
+
+
+FUNCTION FC8 : VOID
+//XHISEL/////////////////////////////////////////////////////////////////////////////////////////
+
+VAR_TEMP
+    PVGB:REAL;
+    CASGB:REAL;
+    PV_GAIN:REAL;
+    PV_BIAS:REAL;
+    CAS_GAIN:REAL;
+    CAS_BIAS:REAL;
+    SCALE_TOP:REAL;
+    SCALE_BOT:REAL;
+END_VAR
+
+VAR_INPUT
+    PV:REAL;
+    CAS:REAL;
+    Param:UDT16;
+END_VAR
+
+VAR_OUTPUT
+    OUT:REAL;
+END_VAR
+
+    PV_GAIN:=Param.PV_GAIN;
+    PV_BIAS:=Param.PV_BIAS;
+    CAS_GAIN:=Param.CAS_GAIN;
+    CAS_BIAS:=Param.CAS_BIAS;
+    SCALE_TOP:=Param.SCALE_TOP;
+    SCALE_BOT:=Param.SCALE_BOT;
+  
+    PVGB:=(PV*PV_GAIN)+PV_BIAS;
+    CASGB:=(CAS*CAS_GAIN)+CAS_BIAS;
+    
+    IF PVGB >= CASGB THEN
+        OUT:=PVGB;
+    ELSE
+        OUT:=CASGB;
+    END_IF;
+    
+    
+    IF OUT >= SCALE_TOP THEN
+        OUT:=SCALE_TOP;
+    ELSIF OUT <= SCALE_BOT THEN
+        OUT:=SCALE_BOT;
+    END_IF;
+
+
+END_FUNCTION

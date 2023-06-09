@@ -1,0 +1,41 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+DATA_BLOCK DB4
+TITLE = 'Send_DB'
+//
+// Insert a variable for every memory variable that are to be sent to partner CPU
+//
+AUTHOR: 'RJ'
+     
+STRUCT
+    A:BOOL;
+    B:INT;
+    C:REAL;
+    D:WORD;
+    E:DWORD;
+END_STRUCT
+
+BEGIN
+
+END_DATA_BLOCK
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+FUNCTION FC4 : VOID
+
+TITLE = 'Memory_to_DB'
+//
+// To move data from memory variables to DB variables 
+//
+AUTHOR: 'RJ'
+
+AA:=DB3.A;
+BB:=DB3.B;
+CC:=DB3.C;
+DD:=DB3.D;
+
+END_FUNCTION
+
+
+
+

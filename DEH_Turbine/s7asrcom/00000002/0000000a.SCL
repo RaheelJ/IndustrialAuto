@@ -1,0 +1,45 @@
+TYPE UDT6
+AUTHOR : 'Sabeeh'
+
+    STRUCT
+    // Type Description
+    LOLM :REAL;
+    HILM :REAL;
+    END_STRUCT
+END_TYPE
+
+FUNCTION FC16 : VOID
+
+AUTHOR : 'Sabeeh'
+
+// Block Parameters
+VAR_INPUT
+    // Input Parameters
+    IN : REAL;
+    PARA_VAl : UDT6;    
+
+END_VAR
+
+VAR_OUTPUT
+    // Output Parameters
+OUT : REAL ;
+END_VAR
+
+VAR
+    // Static Variables
+
+END_VAR
+
+    // Statement Section
+     IF IN > PARA_VAl.HILM THEN 
+         // Statement Section_IF
+        OUT := PARA_VAl.HILM;
+    ELSIF IN < PARA_VAl.LOLM THEN
+        // Statement Section_ELSIF
+        OUT := PARA_VAl.LOLM;
+    ELSE
+        // Statement Section_ELSE
+        OUT := IN;
+    END_IF;
+
+END_FUNCTION

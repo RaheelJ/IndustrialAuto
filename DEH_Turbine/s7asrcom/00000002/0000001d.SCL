@@ -1,0 +1,59 @@
+TYPE UDT24
+//SUM8W_UDT
+
+Author:'RJ'
+    STRUCT
+    // Type Description
+    WT1:REAL;
+    WT2:REAL;
+    WT3:REAL;
+    WT4:REAL;
+    WT5:REAL;
+    WT6:REAL;
+    WT7:REAL;
+    WT8:REAL;
+    END_STRUCT
+END_TYPE
+
+
+FUNCTION FC24 : VOID
+//SUM8W
+
+Author:'RJ'
+VAR_INPUT
+    IN1:REAL;
+    IN2:REAL;
+    IN3:REAL;
+    IN4:REAL;
+    IN5:REAL;
+    IN6:REAL;
+    IN7:REAL;
+    IN8:REAL;
+    Param:UDT24;
+END_VAR
+
+VAR_OUTPUT
+    OUT:REAL;
+END_VAR
+
+VAR
+    WT1:REAL;
+    WT2:REAL;
+    WT3:REAL;
+    WT4:REAL;
+    WT5:REAL;
+    WT6:REAL;
+    WT7:REAL;
+    WT8:REAL;
+END_VAR
+
+    WT1:=Param.WT1;
+    WT2:=Param.WT2;
+    WT3:=Param.WT3;
+    WT4:=Param.WT4;
+    WT5:=Param.WT5;
+    WT6:=Param.WT6;
+    WT7:=Param.WT7;
+    WT8:=Param.WT8;
+    OUT:=(IN1*WT1)+(IN2*WT2)+(IN3*WT3)+(IN4*WT4)+(IN5*WT5)+(IN6*WT6)+(IN7*WT7)+(IN8*WT8);
+END_FUNCTION

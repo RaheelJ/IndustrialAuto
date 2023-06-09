@@ -1,0 +1,54 @@
+FUNCTION FC89 : VOID
+
+TITLE = '2xHISIGMTV, QC'
+// Supporting block for sheet 12 (ATC)
+AUTHOR: 'RJ'
+
+
+VAR_INPUT
+    INPUT:REAL;
+    STPT_1:REAL;
+    STPT_2:REAL;
+    Param_1:UDT8;
+    Param_2:UDT8;
+END_VAR
+
+VAR_OUTPUT
+    OUT_1:BOOL;
+    OUT_2:BOOL;
+    OUT_QC:BOOL;
+END_VAR
+
+VAR
+    Para_1:UDT8;
+    Para_2:UDT8;
+END_VAR
+
+
+
+//HISIGMTV_1///////////////////////////////////////////////////////////////////////////
+
+Para_1:=Param_1;
+Para_2:=Param_2;
+
+HISIGMTV(IN :=  INPUT// IN: REAL
+         ,STPT := STPT_1 // IN: REAL
+         ,PARA_VAl := Para_1 // IN: STRUCT
+         ,OUT :=  OUT_1// OUT: BOOL
+         ); // VOID
+ 
+//HISIGMTV_2///////////////////////////////////////////////////////////////////////////
+ 
+HISIGMTV(IN := INPUT // IN: REAL
+         ,STPT := STPT_2 // IN: REAL
+         ,PARA_VAl := Para_2 // IN: STRUCT
+         ,OUT := OUT_2 // OUT: BOOL
+         ); // VOID
+ 
+//QC////////////////////////////////////////////////////////////////////////////////////// 
+
+QC(IN := INPUT // IN: REAL
+   ,OUT := OUT_QC // OUT: BOOL
+   ); // VOID
+     
+END_FUNCTION
